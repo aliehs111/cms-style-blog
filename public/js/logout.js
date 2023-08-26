@@ -1,10 +1,5 @@
 const logout = async () => {
-    // TODO: Add a comment describing the functionality of this statement
-  
-  
-    
-    
-      // TODO: Add a comment describing the functionality of this expression
+       // directing the logout route in the api/users/logout.js file
       const response = await fetch("/api/users/logout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
