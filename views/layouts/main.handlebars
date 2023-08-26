@@ -5,8 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ems-style-blog</title>
 </head>
+
 <body>
+    <header>
+        <h1>EMS Style Blog</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
+                {{#if loggedIn}}
+                <li><a href="#" id="logout">Logout</a></li>
+                {{else}}
+                <li><a href="/signup">Login</a></li>
+                {{/if}}
+            </ul>
+        </nav>
+    </header>
+
     {{{body}}}
-    
+
+
+
+{{#if loggedIn}}
+       <script src="/js/logout.js"></script> 
+{{/if}}  
 </body>
 </html>

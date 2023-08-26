@@ -2,10 +2,13 @@ const router = require('express').Router();
 
 
 router.get('/', function(req, res) {
-    res.render('home')
+    res.render('home',{
+        loggedIn: req.session.logged_in
+
+    })
 });
 
-router.get('/', function(req, res) {
+router.get('/signup', function(req, res) {
     res.render('signup')
 });
 
