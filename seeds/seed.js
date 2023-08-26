@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const fs = require('fs');
-const { User, Post, Comment } = require('../models'); // Adjust the import path based on your project structure
+const { User, Post, Comment } = require('../models'); // Import all models
 
 (async () => {
   // Sync the models with the database

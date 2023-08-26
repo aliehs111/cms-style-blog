@@ -34,10 +34,13 @@ User.init(
         newUserData.password = await bcrypt.hash(newUserData.password, 10);
         return newUserData;
       },
-      beforeUpdate: async (updatedUserData) => {
-        updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+      beforeUpdate: async (updatedUserData) => { //beforeUpdate hook to hash the password before a user record is updated
+        if (updatedUserData.changed('password')) { //avoid unnecessary hashing of passwords when the user record is updated without a password change
+          updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+        }
         return updatedUserData;
       },
+      
     },
     sequelize,
     timestamps: false,
