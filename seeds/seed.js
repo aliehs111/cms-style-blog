@@ -4,9 +4,9 @@ const { User, Post, Comment } = require('../models'); // Import all models
 
 (async () => {
   // Sync the models with the database
-  await User.sync({ force: true });
-  await Post.sync({ force: true });
   await Comment.sync({ force: true });
+  await Post.sync({ force: true });
+  await User.sync({ force: true });
 
   // Load user and post data from JSON files
   const usersData = JSON.parse(fs.readFileSync('./userData.json', 'utf8'));
