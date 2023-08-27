@@ -1,11 +1,11 @@
 [
     {
-      "username": "fred_flinstone",
-      "password": "hashed_password"
+      "user_name": "john_smith",
+      "password": "12345678"
     },
     {
-      "username": "barney_rubble",
-      "password": "hashed_password"
+      "user_name": "jane_doe",
+      "password": "87654321"
     }
   ]
   

@@ -1,29 +1,29 @@
-const bcrypt = require('bcrypt');
-const fs = require('fs');
-const { User, Post, Comment } = require('../models'); // Import all models
+const bcrypt = require("bcrypt");
+const fs = require("fs");
+const { User, Post, Comment } = require("../models"); // Import all models
+const sequelize = require("../config/connection");
+const path = require("path");
 
 (async () => {
   // Sync the models with the database
-  await Comment.sync({ force: true });
-  await Post.sync({ force: true });
-  await User.sync({ force: true });
+  await sequelize.sync({ force: true });
 
   // Load user and post data from JSON files
-  const usersData = JSON.parse(fs.readFileSync('./userData.json', 'utf8'));
-  const postsData = JSON.parse(fs.readFileSync('./postData.json', 'utf8'));
+  const usersData = JSON.parse(
+    fs.readFileSync(path.resolve(__dirname, "userData.json"), "utf8")
+  );
+  const postsData = JSON.parse(
+    fs.readFileSync(path.resolve(__dirname, "postData.json"), "utf8")
+  );
+  const commentsData = JSON.parse(
+    fs.readFileSync(path.resolve(__dirname, "commentData.json"), "utf8")
+  );
 
   // Seed users
-  await User.bulkCreate(usersData.map(user => ({
-    ...user,
-    password: bcrypt.hashSync(user.password, 10),
-  })));
+  await User.bulkCreate(usersData);
+  await Post.bulkCreate(postsData);
+  await Comment.bulkCreate(commentsData);
 
-  // Seed posts
-  const users = await User.findAll();
-  for (const postData of postsData) {
-    const user = users.find(u => u.username === postData.username);
-    await Post.create({ ...postData, userId: user.id });
-  }
-
-  console.log('Database seeded successfully!');
+  console.log("Database seeded successfully!");
+  process.exit(0);
 })();

@@ -1,13 +1,15 @@
 [
     {
       "content": "Great article! But I disagree with all of it",
-      "username": "fred_flinstone",
-      "postTitle": "Introduction to Web Development"
+      "user_id": 1,
+      "post_id": 2
     },
+
     {
       "content": "Thanks for sharing!",
-      "username": "barney_rubble",
-      "postTitle": "JavaScript Fundamentals"
+      "user_id": 2,
+      "post_id": 1
+  
     }
   ]
   

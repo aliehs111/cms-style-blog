@@ -2,12 +2,12 @@
     {
       "title": "Introduction to Web Development",
       "content": "In this post, we will explore the basics of web development...",
-      "username": "barney_rubble"
+      "user_id": 1
     },
     {
       "title": "JavaScript Fundamentals",
       "content": "Learn about the fundamental concepts of JavaScript programming...",
-      "username": "fred_flinstone"
+      "user_id": 2
     }
   ]
   
