@@ -7,7 +7,7 @@ router.post('/', withAuth, async (req, res) => {
   try {
     const newPost = await Post.create({
       ...req.body,
-      user_id: req.session.user_id, // Assuming you store the user's ID in the session
+      user_id: req.session.user_id, // Ensuring the post belongs to the current user
     });
 
     res.status(200).json(newPost);
