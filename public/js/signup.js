@@ -1,4 +1,3 @@
-
 const signupFormHandler = async (event) => {
   event.preventDefault();
 
@@ -7,7 +6,7 @@ const signupFormHandler = async (event) => {
 
   if (user_name && password) {
     if (password.length < 8) {
-      alert("Password must be at least 8 characters long");
+      showErrorMsg("Password must be at least 8 characters long");
     }
 
     try {
@@ -19,16 +18,13 @@ const signupFormHandler = async (event) => {
 
       if (response.ok) {
         // After successful signup, perform login
-        await login(user_name, password);
         document.location.replace("/dashboard");
         console.log("Success");
-        alert("Success");
       } else {
-        alert("Error occurred. Try again");
+        showErrorMsg("Login failed. Try again.");
       }
     } catch (error) {
-      console.error("Error:", error);
-      alert("Error occurred. Try again");
+      showErrorMsg("Login failed. Try again.");
     }
   }
 };
@@ -42,11 +38,12 @@ const login = async (user_name, password) => {
     });
 
     if (!response.ok) {
-      throw new Error("Failed to log in");
+      showErrorMsg("Failed to log in");
+      return
     }
+    document.location.replace("/dashboard");
   } catch (error) {
-    console.error("Error:", error);
-    alert("Failed to log in");
+    showErrorMsg("Failed to log in");
   }
 };
 
@@ -58,13 +55,17 @@ const loginFormHandler = async (event) => {
 
   if (user_name && password) {
     if (password.length < 8) {
-      alert("Password must be at least 8 characters long");
+      showErrorMsg("Password must be at least 8 characters long");
     }
 
     await login(user_name, password);
-    document.location.replace("/dashboard");
+   
   }
 };
 
-document.querySelector(".login-form").addEventListener("submit", loginFormHandler);
-document.querySelector(".signup-form").addEventListener("submit", signupFormHandler);
+document
+  .querySelector(".login-form")
+  .addEventListener("submit", loginFormHandler);
+document
+  .querySelector(".signup-form")
+  .addEventListener("submit", signupFormHandler);

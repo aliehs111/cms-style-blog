@@ -14,8 +14,7 @@
           <li><a href="/">Home</a></li>
           <li><a href="/dashboard">Dashboard</a></li>
           {{#if loggedIn}}
-            <li><a href="#" id="logout">Logout</a></li>
-            <li><a href="/post">Create Post</a></li>
+            <li><a href="#" id="logout">Logout</a></li>           
           {{else}}
             <li><a href="/signup">Login</a></li>
           {{/if}}
@@ -29,9 +28,9 @@
 
     {{{body}}}
 
+<script src="/js/scripts.js"></script>
     {{#if loggedIn}}
       <script src="/js/logout.js"></script>
-      <script src="/js/post.js"></script>
     {{/if}}
   </body>
 </html>

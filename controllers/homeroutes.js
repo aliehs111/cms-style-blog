@@ -41,6 +41,47 @@ router.get('/', async function (req, res) {
     }
     
 });
+router.get('/post/:id', async function (req, res) {
+    try { 
+        const postData = await PostModel.findOne({
+            where: {
+                id: req.params.id
+            },
+            attributes: [
+                "id", "title", "content", "date_created"
+            ],
+            include: [
+                {
+                    model: UserModel,
+                    attributes: ["user_name"]
+
+                },
+                {
+                    model: CommentModel,
+                    attributes: ["content", "date_created", "id",],
+                    include: {
+                        model: UserModel,
+                        attributes: ["user_name"]
+                    }
+                   
+                }
+            ]
+            
+        });
+        const post = postData.get({plain: true});
+            res.render('postdetails',{
+            loggedIn: req.session.logged_in, post
+    
+        })
+    } catch (error) {
+            res.render('postdetails',{
+            loggedIn: req.session.logged_in, 
+            error:'Failed to load post'
+
+        })
+    }
+    
+});
 
 router.get('/signup', function(req, res) {
     res.render('signup')
