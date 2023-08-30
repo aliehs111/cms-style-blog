@@ -1,18 +1,23 @@
 {{> post post}}
 
 {{!-- this section is for new comments if logged in --}}
-{{#if loggedIn}}
+{{!-- {{#if withAuth}} --}}
 <form id="create-comment-form">
+    <input type="hidden" id="post-id" name="post-id" value="{{post_id}}">
     <textarea id="comment-content" name="comment-content" required></textarea>
     <button type="submit">Create Comment</button>
+    <button type="submit">Edit Comment</button>
 </form>
-{{/if}}
+{{!-- {{/if}} --}}
 
 
 {{!-- comments --}}
 
 <div class="comment-container">
-    <h3>Comments</h3>
+    <h3>Comments for this Post</h3>
     {{#each post.comments as |comment|}}
     {{> comment comment}}
     {{/each}}
+</div>
+
+<script src="/js/comment.js"></script>

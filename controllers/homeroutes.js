@@ -70,14 +70,17 @@ router.get('/post/:id', async function (req, res) {
         });
         const post = postData.get({plain: true});
             res.render('postdetails',{
-            loggedIn: req.session.logged_in, post
+            loggedIn: req.session.logged_in, post,
+            post_id: req.params.id
     
         })
     } catch (error) {
             res.render('postdetails',{
-            loggedIn: req.session.logged_in, 
-            error:'Failed to load post'
-
+            loggedIn: req.session.logged_in, post,
+            error:'Failed to load post',
+            post_id: req.params.id,
+            loggedInUser: req.user, // Pass the logged-in user's data
+        
         })
     }
     
