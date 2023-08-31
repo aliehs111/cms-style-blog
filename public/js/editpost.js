@@ -1,41 +1,25 @@
-const withAuth = require("../../utils/auth");
 
-const editPostForm = document.querySelector("#edit_post");
-const postID = editPostForm.getAttribute("data-post-id");
+const editPostForm = document.querySelector("#edit-post-form");
+const postID = document.querySelector("#post-id").value;
 
-
-  // Show the "Edit My Post" button
-  const editButton = document.createElement("button");
-  editButton.type = "button";
-  editButton.id = "goto_edit_post";
-  editButton.textContent = "Edit My Post";
-  editButton.addEventListener("click", () => {
-    // Redirect to the edit page or perform other actions
-    window.location.replace(`/edit-post/${postID}`); // Replace postID with the actual post ID
-    // Replace postID with the actual post ID
-  });
-  editPostForm.appendChild(editButton);
-
-
+  
 editPostForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const title = document.querySelector("#post-title").value;
   const content = document.querySelector("#post-content").value;
 
-  const newPostData = {
+  const editPostData = {
     title,
     content,
   };
   try {
-    const response = await fetch("/api/posts", {
+    const response = await fetch(`/api/posts/${postID}`, {
       method: "PUT",
-      credentials: "include",
-      mode: "cors",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(newPostData),
+      body: JSON.stringify(editPostData),
     });
 
     if (response.ok) {
@@ -49,3 +33,22 @@ editPostForm.addEventListener("submit", async (event) => {
     showErrorMsg("Error editing post. Try again.");
   }
 });
+
+document.querySelector("#del_post").addEventListener("click", async (event) => {
+  event.preventDefault();
+
+  try {
+    const response = await fetch(`/api/posts/${postID}`, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      window.location.replace("/dashboard");
+      // Redirect to a new page or perform other actions
+    } else {
+      showErrorMsg("Error deleting post. Try again.");
+    }
+  } catch (error) {
+    showErrorMsg("Error deleting post. Try again.");
+  }
+})

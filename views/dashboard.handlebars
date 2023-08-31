@@ -1,13 +1,18 @@
 {{!-- <h1>Dashboard</h1> --}}
-<h3>Hello {{userName}}!</h3>
+<h2 class="mb-4">Hello <span class="username"> {{userName}}</span>!</h2>
 
-<h2><a href="/dashboard/new">Create New Post</a></h2>
+<h2><a class="btn btn-info" href="/dashboard/new">Create New Post</a></h2>
 
 <section class="posts_container">
     <h3>My Posts</h3>
     
     {{#each posts as |post|}}
-        {{> post post}}         
+        <div class = "admin_post">
+        {{> post post}}  
+        <div class="edit_btn">
+        <a href="/dashboard/edit/{{post.id}}">Edit</a>
+        </div>
+        </div>       
     {{/each}}
 </section>
 

@@ -48,4 +48,25 @@ router.get("/new", withAuth, async function (req, res) {
   });
 });
 
+router.get("/edit/:id", withAuth, async function (req, res) {
+  try {
+    const postData = await PostModel.findOne({
+      where: {
+        id: req.params.id,
+      },
+      attributes: ["id", "title", "content", "date_created"],
+    });
+    const post = postData.get({ plain: true });
+    res.render("editpost", {
+      loggedIn: req.session.logged_in,
+      post,
+    });
+  } catch (error) {
+    res.render("editpost", {
+      loggedIn: req.session.logged_in,
+      error: "Failed to load post",
+    });
+  }
+});
+
 module.exports = router;
