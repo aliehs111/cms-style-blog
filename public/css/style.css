@@ -137,3 +137,13 @@ input {
     background-color: #f8f8f8;
     resize: none;
   }
+
+  /* error message */
+    .error {
+        color: black;
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: center;
+        background-color: #f1aeb5;
+        padding: 15px;
+    }
