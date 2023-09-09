@@ -27,7 +27,7 @@ router.put('/:id', withAuth, async (req, res) => {
     });
 
     if (!updatedComment[0]) {
-      res.status(404).json({ message: 'No comment found with this id' });
+      res.status(404).json({ message: 'Could not update comment' });
       return;
     }
 
